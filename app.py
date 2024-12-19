@@ -9,12 +9,7 @@ model = joblib.load("adaboost_model.pkl")  # Replace with your actual model file
 # Set up Streamlit app
 st.title("Bitcoin Price Prediction: Adj Close")
 st.write("""
-This application predicts the **Adjusted Close (Adj Close)** price of Bitcoin based on the following input features:
-- Open Price
-- High Price
-- Low Price
-- Volume
-""")
+This application predicts whether the Bitcoin price will go Up or Down
 
 # Input form for user inputs
 st.header("Input Features")
@@ -46,9 +41,9 @@ if st.button("Predict"):
         prediction = model.predict(input_data)  # Binary output: 0 (Low) or 1 (High)
         
         # Convert prediction to High or Low
-        result = "High" if prediction[0] == 1 else "Low"
+        result = "Up" if prediction[0] == 1 else "Down"
 
         # Display the result
-        st.success(f"The predicted price category is: **{result}**")
+        st.success(f"Bitcoin Price will go **{result}**")
     except Exception as e:
         st.error(f"An error occurred during prediction: {e}")
