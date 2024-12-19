@@ -23,6 +23,7 @@ st.header("Input Features")
 open_price = st.number_input("Open Price (in USD)", value=0.0, step=0.01)
 high_price = st.number_input("High Price (in USD)", value=0.0, step=0.01)
 low_price = st.number_input("Low Price (in USD)", value=0.0, step=0.01)
+close_price = st.number_input("Close Price (in USD)", value=0.0, step=0.01)
 volume = st.number_input("Volume (in millions)", value=0.0, step=1.0)
 
 # Organize inputs into a DataFrame
@@ -30,6 +31,7 @@ input_data = pd.DataFrame({
     'Open': [open_price],
     'High': [high_price],
     'Low': [low_price],
+    'Close': [close_price],
     'Volume': [volume]
 })
 
