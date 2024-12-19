@@ -9,8 +9,7 @@ model = joblib.load("adaboost_model.pkl")  # Replace with your actual model file
 # Set up Streamlit app
 st.title("Bitcoin Price Prediction: Adj Close")
 st.write("""
-This application predicts whether the Bitcoin price will go Up or Down
-
+This application predicts whether the Bitcoin price will go Up or Down""")
 # Input form for user inputs
 st.header("Input Features")
 
