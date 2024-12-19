@@ -19,9 +19,6 @@ Fill in the values below and click **Predict** to see the results.
 st.header("Input Bitcoin Features")
 
 # Create user input fields for features
-year = st.number_input("Year", min_value=2000, max_value=2100, value=2023, step=1)
-month = st.number_input("Month", min_value=1, max_value=12, value=1, step=1)
-day = st.number_input("Day", min_value=1, max_value=31, value=1, step=1)
 open_price = st.number_input("Open Price (in USD)", value=0.0, step=0.01)
 high_price = st.number_input("High Price (in USD)", value=0.0, step=0.01)
 low_price = st.number_input("Low Price (in USD)", value=0.0, step=0.01)
@@ -29,9 +26,6 @@ volume = st.number_input("Volume (in millions)", value=0.0, step=1.0)
 
 # Prepare input data
 input_data = pd.DataFrame({
-    'Year': [year],
-    'Month': [month],
-    'Day': [day],
     'Open': [open_price],
     'High': [high_price],
     'Low': [low_price],
