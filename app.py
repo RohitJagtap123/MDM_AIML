@@ -1,27 +1,31 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import joblib
 
-# Load the trained model and feature names
-model, feature_names = joblib.load("adaboost_model.pkl")  # Ensure this file contains the model and feature names
+# Load the trained model
+model = joblib.load("trained_model.pkl")  # Replace with your actual model file path
 
-# Streamlit app title
-st.title("Bitcoin Price Prediction: High vs. Low")
-
-# Introduction
+# Set up Streamlit app
+st.title("Bitcoin Price Prediction: Adj Close")
 st.write("""
-This app predicts whether the Bitcoin price category is **High** or **Low** based on the provided features. 
-Fill in the fields below and click **Predict** to get the results.
+This application predicts the **Adjusted Close (Adj Close)** price of Bitcoin based on the following input features:
+- Open Price
+- High Price
+- Low Price
+- Volume
 """)
 
-# Input fields for features
-st.header("Input Bitcoin Features")
+# Input form for user inputs
+st.header("Input Features")
+
+# Input fields for the features
 open_price = st.number_input("Open Price (in USD)", value=0.0, step=0.01)
 high_price = st.number_input("High Price (in USD)", value=0.0, step=0.01)
 low_price = st.number_input("Low Price (in USD)", value=0.0, step=0.01)
 volume = st.number_input("Volume (in millions)", value=0.0, step=1.0)
 
-# Prepare the input data
+# Organize inputs into a DataFrame
 input_data = pd.DataFrame({
     'Open': [open_price],
     'High': [high_price],
@@ -29,21 +33,18 @@ input_data = pd.DataFrame({
     'Volume': [volume]
 })
 
-# Ensure the input data matches the model's feature names
-try:
-    input_data = input_data[feature_names]
-except KeyError:
-    st.error("Feature mismatch! Ensure the input fields match the model's expected features.")
-
-# Display the input data for confirmation
-st.write("Input Data Preview:")
+# Display the input data (optional)
+st.write("Input Data:")
 st.write(input_data)
 
-# Prediction
+# Prediction logic
 if st.button("Predict"):
     try:
+        # Ensure input data matches model's feature structure
         prediction = model.predict(input_data)
-        result = "High" if prediction[0] == 1 else "Low"
-        st.success(f"The predicted price category is: **{result}**")
+        predicted_price = round(prediction[0], 2)
+
+        # Display prediction
+        st.success(f"The predicted Adj Close price is: **${predicted_price}**")
     except Exception as e:
         st.error(f"An error occurred during prediction: {e}")
