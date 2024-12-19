@@ -4,7 +4,7 @@ import numpy as np
 import joblib
 
 # Load the trained model
-model = joblib.load("trained_model.pkl")  # Replace with your actual model file path
+model = joblib.load("adaboost_model.pkl")  # Replace with your actual model file path
 
 # Set up Streamlit app
 st.title("Bitcoin Price Prediction: Adj Close")
