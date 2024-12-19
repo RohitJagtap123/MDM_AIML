@@ -43,10 +43,12 @@ st.write(input_data)
 if st.button("Predict"):
     try:
         # Ensure input data matches model's feature structure
-        prediction = model.predict(input_data)
-        predicted_price = round(prediction[0], 2)
+        prediction = model.predict(input_data)  # Binary output: 0 (Low) or 1 (High)
+        
+        # Convert prediction to High or Low
+        result = "High" if prediction[0] == 1 else "Low"
 
-        # Display prediction
-        st.success(f"The predicted Adj Close price is: **${predicted_price}**")
+        # Display the result
+        st.success(f"The predicted price category is: **{result}**")
     except Exception as e:
         st.error(f"An error occurred during prediction: {e}")
